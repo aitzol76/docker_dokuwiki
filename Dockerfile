@@ -14,7 +14,7 @@ ARG DOKUWIKI_CSUM=6272e552b9a71a764781bd4182dd2b7d
 ARG DOKUWIKI_DEBIAN_PACKAGES=""
 
 # Update & install packages & cleanup afterwards
-RUN DEBIAN_FRONTEND=noninteractive && \
+RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install \
@@ -26,6 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
         php-curl \
         php-xml \
         php-mbstring \
+        perl-modules-5.26 \
         ${DOKUWIKI_DEBIAN_PACKAGES} && \
     apt-get clean autoclean && \
     apt-get autoremove && \
