@@ -5,17 +5,17 @@
 # TO_RUN:         docker run -d -p 80:80 --name my_wiki mprasil/dokuwiki
 
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER Miroslav Prasil <miroslav@prasil.info>
 
 # Set the version you want of Twiki
-ENV DOKUWIKI_VERSION=2018-04-22b
-ARG DOKUWIKI_CSUM=605944ec47cd5f822456c54c124df255
+ENV DOKUWIKI_VERSION=2018-04-22c
+ARG DOKUWIKI_CSUM=6272e552b9a71a764781bd4182dd2b7d
 ARG DOKUWIKI_DEBIAN_PACKAGES=""
 
 # Update & install packages & cleanup afterwards
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update && \
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install \
         wget \
@@ -52,4 +52,3 @@ VOLUME ["/dokuwiki/data/","/dokuwiki/lib/plugins/","/dokuwiki/conf/","/dokuwiki/
 
 ENTRYPOINT ["/startup.sh"]
 CMD ["run"]
-
