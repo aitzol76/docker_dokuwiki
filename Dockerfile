@@ -14,7 +14,7 @@ ARG DOKUWIKI_CSUM=605944ec47cd5f822456c54c124df255
 ARG DOKUWIKI_DEBIAN_PACKAGES=""
 
 # Update & install packages & cleanup afterwards
-RUN DEBIAN_FRONTEND=noninteractive \
+RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get -y upgrade && \
     apt-get -y install \
