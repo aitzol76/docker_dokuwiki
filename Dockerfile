@@ -9,8 +9,8 @@ FROM ubuntu:18.04
 MAINTAINER Miroslav Prasil <miroslav@prasil.info>
 
 # Set the version you want of Twiki
-ENV DOKUWIKI_VERSION=2018-04-22c
-ARG DOKUWIKI_CSUM=6272e552b9a71a764781bd4182dd2b7d
+ENV DOKUWIKI_VERSION=2020-07-29
+ARG DOKUWIKI_CSUM=8867b6a5d71ecb5203402fe5e8fa18c9
 ARG DOKUWIKI_DEBIAN_PACKAGES=""
 
 # Update & install packages & cleanup afterwards
