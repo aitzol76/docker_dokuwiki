@@ -5,12 +5,13 @@
 # TO_RUN:         docker run -d -p 80:80 --name my_wiki mprasil/dokuwiki
 
 
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 MAINTAINER Miroslav Prasil <miroslav@prasil.info>
 
-# Set the version you want of Twiki
-ENV DOKUWIKI_VERSION=2020-07-29
-ARG DOKUWIKI_CSUM=8867b6a5d71ecb5203402fe5e8fa18c9
+# Set the version you want of dokuwiki
+# https://download.dokuwiki.org/archive
+ENV DOKUWIKI_VERSION=2022-07-31a
+ARG DOKUWIKI_CSUM=4459ea99e3a4ce2b767482f505724dcc
 ARG DOKUWIKI_DEBIAN_PACKAGES=""
 
 # Update & install packages & cleanup afterwards
@@ -26,14 +27,14 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         php-curl \
         php-xml \
         php-mbstring \
-        perl-modules-5.26 \
+        perl-modules-5.34 \
         ${DOKUWIKI_DEBIAN_PACKAGES} && \
     apt-get clean autoclean && \
     apt-get autoremove && \
     rm -rf /var/lib/{apt,dpkg,cache,log}
 
 # Download & check & deploy dokuwiki & cleanup
-RUN wget -q -O /dokuwiki.tgz "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
+RUN wget -q -O /dokuwiki.tgz "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
     if [ "$DOKUWIKI_CSUM" != "$(md5sum /dokuwiki.tgz | awk '{print($1)}')" ];then echo "Wrong md5sum of downloaded file!"; exit 1; fi && \
     mkdir /dokuwiki && \
     tar -zxf dokuwiki.tgz -C /dokuwiki --strip-components 1
