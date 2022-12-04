@@ -5,7 +5,7 @@
 # TO_RUN:         docker run -d -p 80:80 --name my_wiki mprasil/dokuwiki
 
 
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 MAINTAINER Miroslav Prasil <miroslav@prasil.info>
 
 # Set the version you want of dokuwiki
@@ -27,7 +27,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         php-curl \
         php-xml \
         php-mbstring \
-        perl-modules-5.26 \
+        perl-modules-5.34 \
         ${DOKUWIKI_DEBIAN_PACKAGES} && \
     apt-get clean autoclean && \
     apt-get autoremove && \
